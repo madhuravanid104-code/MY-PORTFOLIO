@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Madhura Gowda | Portfolio</title>
+  <style>
+    :root {
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --accent: #a78bfa;
+      --text: #e2e8f0;
+      --dark: #0f172a;
+      --glow1: rgba(99, 102, 241, 0.7);
+      --glow2: rgba(167, 139, 250, 0.6);
+      --glow3: rgba(244, 114, 182, 0.4);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: var(--dark);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at 20% 30%, var(--glow1) 0%, transparent 40%),
+                  radial-gradient(circle at 80% 70%, var(--glow2) 0%, transparent 45%),
+                  radial-gradient(circle at 40% 90%, var(--glow3) 0%, transparent 50%);
+      opacity: 0.45;
+      z-index: -2;
+      animation: pulse 18s ease-in-out infinite alternate;
+    }
+
+    @keyframes pulse {
+      0%   { transform: scale(1.0); opacity: 0.4; }
+      50%  { transform: scale(1.15); opacity: 0.65; }
+      100% { transform: scale(1.0); opacity: 0.4; }
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── Sticky Navigation ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(167,139,250,0.2);
+      padding: 1rem 0;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-link {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 500;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .nav-link:hover {
+      color: var(--accent);
+      background: rgba(167,139,250,0.12);
+      box-shadow: 0 0 20px rgba(167,139,250,0.3);
+    }
+
+    .nav-link.active {
+      color: var(--accent);
+      background: rgba(167,139,250,0.18);
+      box-shadow: 0 0 30px rgba(167,139,250,0.5),
+                  0 0 60px rgba(99,102,241,0.35);
+      text-shadow: 0 0 15px rgba(167,139,250,0.7);
+    }
+
+    header {
+      background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+      position: relative;
+      overflow: hidden;
+      padding: 140px 0 100px;
+      text-align: center;
+      border-bottom: 1px solid rgba(99,102,241,0.15);
+    }
+
+    header::before, header::after {
+      content: "";
+      position: absolute;
+      inset: -50%;
+      opacity: 0.5;
+      z-index: 0;
+    }
+
+    header::before {
+      background: radial-gradient(circle at 30% 20%, rgba(99,102,241,0.35) 0%, transparent 60%);
+      animation: float 25s infinite linear;
+    }
+
+    header::after {
+      background: radial-gradient(circle at 70% 80%, rgba(167,139,250,0.3) 0%, transparent 55%);
+      animation: float 30s infinite reverse;
+    }
+
+    @keyframes float {
+      0%   { transform: translate(0, 0) rotate(0deg); }
+      100% { transform: translate(15%, 20%) rotate(360deg); }
+    }
+
+    header .container { position: relative; z-index: 2; }
+
+    .profile-pic {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid rgba(167,139,250,0.5);
+      box-shadow: 0 0 40px rgba(167,139,250,0.7), 0 0 80px rgba(99,102,241,0.4);
+      margin-bottom: 1.8rem;
+      transition: transform 0.4s ease;
+    }
+
+    .profile-pic:hover { transform: scale(1.08); }
+
+    header h1 {
+      font-size: 3.8rem;
+      margin-bottom: 0.6rem;
+      text-shadow: 0 0 30px rgba(99,102,241,0.8);
+    }
+
+    header h2 {
+      font-size: 1.7rem;
+      font-weight: 400;
+      opacity: 0.9;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 0 20px rgba(167,139,250,0.6);
+    }
+
+    .tagline {
+      font-size: 1.35rem;
+      max-width: 720px;
+      margin: 0 auto 2.5rem;
+      opacity: 0.92;
+    }
+
+    section {
+      padding: 100px 0;
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(8px);
+    }
+
+    section h2 {
+      text-align: center;
+      font-size: 2.8rem;
+      margin-bottom: 3.5rem;
+      color: var(--accent);
+      text-shadow: 0 0 25px rgba(167,139,250,0.5);
+    }
+
+    .about-content, .contact-content {
+      max-width: 820px;
+      margin: 0 auto;
+      font-size: 1.18rem;
+      background: rgba(30, 41, 59, 0.6);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(167,139,250,0.3);
+      border-radius: 20px;
+      padding: 2.8rem 2.5rem;
+      box-shadow: 0 0 50px rgba(99,102,241,0.25);
+      text-align: center;
+    }
+
+    .about-content ul {
+      list-style: none;
+      margin: 1.8rem 0;
+      font-size: 1.1rem;
+    }
+
+    .about-content li {
+      margin: 0.9rem 0;
+      padding-left: 1.8rem;
+      position: relative;
+    }
+
+    .about-content li::before {
+      content: "→";
+      color: var(--accent);
+      position: absolute;
+      left: 0;
+      font-weight: bold;
+    }
+
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2.5rem;
+    }
+
+    .cert-card {
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid rgba(99,102,241,0.25);
+      border-radius: 16px;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+      transition: all 0.35s ease;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3), 0 0 20px rgba(99,102,241,0.15);
+      text-decoration: none;
+      color: inherit;
+      transform: scale(1);
+    }
+
+    .cert-card:hover {
+      transform: translateY(-16px) scale(1.09);
+      box-shadow: 0 30px 70px rgba(0,0,0,0.45),
+                  0 0 50px rgba(99,102,241,0.4),
+                  0 0 80px rgba(167,139,250,0.35);
+      border-color: var(--accent);
+      background: rgba(30, 41, 59, 0.75);
+    }
+
+    .cert-img-container {
+      height: 220px;
+      background: rgba(15,23,42,0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 25px;
+      transition: all 0.35s ease;
+    }
+
+    .cert-card:hover .cert-img-container {
+      transform: scale(1.04);
+    }
+
+    .cert-img-container img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border-radius: 10px;
+      box-shadow: 0 0 25px rgba(0,0,0,0.5);
+      transition: transform 0.4s ease;
+    }
+
+    .cert-card:hover .cert-img-container img {
+      transform: scale(1.06);
+    }
+
+    .cert-info {
+      padding: 1.6rem;
+      transition: all 0.3s ease;
+    }
+
+    .cert-info h3 {
+      font-size: 1.4rem;
+      margin-bottom: 0.7rem;
+      color: var(--accent);
+      transition: all 0.3s ease;
+    }
+
+    .cert-card:hover .cert-info h3 {
+      color: #c4b5fd;
+    }
+
+    .contact-icons {
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      margin: 2.5rem 0;
+      flex-wrap: wrap;
+    }
+
+    .contact-item {
+      text-align: center;
+    }
+
+    .contact-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 20px;
+      background: rgba(99,102,241,0.15);
+      border: 2px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 0 25px rgba(167,139,250,0.4);
+      transition: all 0.3s ease;
+    }
+
+    .contact-item:hover .contact-icon {
+      transform: translateY(-8px);
+      box-shadow: 0 0 40px rgba(167,139,250,0.6);
+      background: rgba(167,139,250,0.25);
+    }
+
+    .contact-item a {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 1.1rem;
+    }
+
+    .contact-item a:hover { color: var(--accent); }
+
+    footer {
+      background: linear-gradient(to top, #0f172a, #1e293b);
+      color: #cbd5e1;
+      text-align: center;
+      padding: 4rem 0 2.5rem;
+      border-top: 1px solid rgba(99,102,241,0.2);
+    }
+
+    @media (max-width: 768px) {
+      header { padding: 100px 0 70px; }
+      header h1 { font-size: 2.8rem; }
+      .profile-pic { width: 140px; height: 140px; }
+      section { padding: 70px 0; }
+      section h2 { font-size: 2.3rem; }
+      .nav-container { gap: 1.2rem; }
+      .nav-link { font-size: 1rem; padding: 0.5rem 1rem; }
+      .cert-card:hover { transform: translateY(-10px) scale(1.04); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav>
+    <div class="nav-container">
+      <a href="#home" class="nav-link active">Home</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#certificates" class="nav-link">Certificates</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </div>
+  </nav>
+
+  <header id="home">
+    <div class="container">
+      <!-- Replace with YOUR real photo URL -->
+      <img 
+        src="img1.jpeg" 
+        alt="Madhura Gowda" 
+        class="profile-pic"
+      >
+      <h1>Hi, I'm Madhuravani D</h1>
+      <h2>Learner • Developer • Dreamer from Hoskote</h2>
+      <p class="tagline">
+        Turning curiosity into code • Exploring web dev, cloud & everything in between
+      </p>
+    </div>
+  </header>
+
+  <section id="about">
+    <div class="container">
+      <h2>About Me</h2>
+      <div class="about-content">
+        <p>Hey there! I'm <strong>Madhuravani D</strong>, a passionate tech enthusiast from Karnataka.</p>
+        <p>I am currently pursuing my Bachelor of Computer Applications at Kristu Jayanti deemed to be university, Bengaluru-a place that inspires growth and excellence..</p>
+        <p>I'm a quick learner, love collaborating, and truly enjoy helping friends & others debug or understand concepts. When I'm not coding, you might find me reading tech blogs, listening to music, or just daydreaming about the next cool thing I want to build.</p>
+        <p>Currently focused on:</p>
+        <ul>
+          <li>Modern frontend technologies & responsive design</li>
+          <li>Building beautiful, user-friendly interfaces</li>
+          <li>Learning backend, APIs & databases</li>
+          <li>Cloud basics & deployment</li>
+          <li>Creating useful mini-projects to learn faster</li>
+        </ul>
+        <p>Always excited to learn new tools, contribute to open source someday, and grow together with the community. Feel free to reach out — let's connect! 🚀</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="certificates">
+    <div class="container">
+      <h2>Certificates & Achievements</h2>
+      <div class="cert-grid">
+
+        <!-- Certificate 1 -->
+        <a href="#" target="_blank" class="cert-card">
+          <div class="cert-img-container">
+            <img src="css3.jpg" alt="Responsive Web Design Certificate">
+          </div>
+          <div class="cert-info">
+            <h3>Responsive Web Design</h3>
+            <div class="issuer">INFOSYS</div>
+            <div class="date">Issued • February 2026</div>
+          </div>
+        </a>
+
+        <!-- Certificate 2 -->
+        <a href="#" target="_blank" class="cert-card">
+          <div class="cert-img-container">
+            <img src="html5.jpg" alt="JavaScript Algorithms Certificate">
+          </div>
+          <div class="cert-info">
+            <h3>Front End Development</h3>
+            <div class="issuer">INFOSYS</div>
+            <div class="date">Issued • February 2026</div>
+          </div>
+        </a>
+
+        <!-- Certificate 3 -->
+        <a href="#" target="_blank" class="cert-card">
+          <div class="cert-img-container">
+            <img src="java.jpg" alt="Front End Libraries Certificate">
+          </div>
+          <div class="cert-info">
+            <h3>Front End Development Libraries</h3>
+            <div class="issuer">INFOSYS</div>
+            <div class="date">Issued • February 2025</div>
+          </div>
+        </a>
+
+        <!-- Certificate 4 -->
+        <a href="#" target="_blank" class="cert-card">
+          <div class="cert-img-container">
+            <img src="frontenddev.jpg" alt="Python for Everybody Certificate">
+          </div>
+          <div class="cert-info">
+            <h3>Front End Development Libraries</h3>
+            <div class="issuer">INFOSYS</div>
+            <div class="date">Issued • February 2026</div>
+          </div>
+        </a>
+
+        <!-- Certificate 5 -->
+        <a href="#" target="_blank" class="cert-card">
+          <div class="cert-img-container">
+            <img src="nodejs.jpg" alt="Nodejs-Concepts">
+          </div>
+          <div class="cert-info">
+            <h3>Nodejs-Concepts</h3>
+            <div class="issuer">Udemy</div>
+            <div class="date">Issued • February 2026</div>
+          </div>
+        </a>
+
+        <!-- Certificate 6 -->
+        <a href="#" target="_blank" class="cert-card">
+          <div class="cert-img-container">
+            <img src="gitguide.jpg" alt="Introduction to Programming Certificate">
+          </div>
+          <div class="cert-info">
+            <h3>Introduction to Programming</h3>
+            <div class="issuer">Udemy</div>
+            <div class="date">Issued • February 2025</div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <h2>Contact Me</h2>
+      <div class="contact-content">
+        <p>I'm always open to new opportunities, collaborations, questions, or just a friendly chat about tech! Reach out anytime.</p>
+        
+        <div class="contact-icons">
+          <!-- Replace with your real links / details -->
+          <div class="contact-item">
+            <div class="contact-icon">✉️</div>
+            <a href="mailto:madhuravanid104@gmail.com">madhuravanid104@gmail.com</a>
+          </div>
+          
+          <div class="contact-item">
+            <div class="contact-icon">🐦</div>
+            <a href="https://x.com/yourusername" target="_blank">@madhuravani104</a>
+          </div>
+          
+          <div class="contact-item">
+            <div class="contact-icon">💻</div>
+            <a href="https://github.com/yourusername" target="_blank">GitHub</a>
+          </div>
+          
+          <div class="contact-item">
+            <div class="contact-icon">🔗</div>
+            <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a>
+          </div>
+        </div>
+
+        <p style="margin-top: 2rem; font-size: 1.1rem;">
+          Looking forward to hearing from you! ✨
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 Madhura Gowda • Made with code, curiosity & glowing dreams</p>
+    </div>
+  </footer>
+
+  <!-- Optional: Simple JS to highlight active nav link on scroll -->
+  <script>
+    const sections = document.querySelectorAll('section, header');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 150; // offset for better timing
+        if (scrollY >= sectionTop) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + current) {
+          link.classList.add('active');
+        }
+      });
+
+      // Special case for home (when near top)
+      if (scrollY < 200) {
+        navLinks.forEach(link => link.classList.remove('active'));
+        document.querySelector('a[href="#home"]').classList.add('active');
+      }
+    });
+  </script>
+
+</body>
+</html>
